@@ -161,7 +161,7 @@ class SddPolicyTests(unittest.TestCase):
         (folder / "specs/material-explorer/spec.md").write_text("## ADDED Requirements\n")
         body = "OpenSpec-Change: " + change + "\nOpenSpec-Phase: combined\n"
         paths = {prefix + "proposal.md", "addon/DetectRadius/Core/Init.lua"}
-        self.assertEqual(self.check(paths, body, number=14), [])
+        self.assertTrue(self.check(paths, body, number=14))
         self.assertTrue(self.check(paths, body, number=16))
         self.assertTrue(self.check(paths | {"private/secret"}, body, number=14))
         self.assertTrue(self.check(paths | {".github/workflows/ci.yml"}, body, number=14))
@@ -236,8 +236,8 @@ class SddPolicyTests(unittest.TestCase):
                         "merged_by": {"login": "hectoresen"}, "base": {"ref": "main"}}
             return [{"filename": prefix + "proposal.md"}]
 
-        self.assertEqual(self.check({"AGENTS.md", "skills/documentation-sync/SKILL.md"},
-                                    body, present=True, api=approved_api), [])
+        self.assertTrue(self.check({"AGENTS.md", "skills/documentation-sync/SKILL.md"},
+                                    body, present=True, api=approved_api))
         # A different change claiming AGENTS in scope still fails.
         self.set_scope(["AGENTS.md", "addon/DetectRadius/**"])
         self.assertTrue(self.check({"AGENTS.md"}, self.implementation, present=True))
