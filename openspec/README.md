@@ -1,11 +1,14 @@
-# DetectRadius OpenSpec / SDD
+# DetectRadius OpenSpec — enforced spec-first process
 
-Intended workflow mirrors CraftAtlas. Required for every gameplay or nontrivial technical change: **two separate PRs**.
+Read AGENTS.md, docs/EXPERIMENTS.md and docs/SDD_COMPLIANCE.md first.
 
-1. PROPOSE: new openspec/changes/<id>/ with proposal.md (why/scope/risks), design.md (API/architecture/fallbacks), specs/<capability>/spec.md (SHALL/WHEN/THEN), tasks.md (verifiable checks), and sdd-scope.json (bounded authorized implementation paths). Submit spec-only PR with OpenSpec-Change: <id> and OpenSpec-Phase: proposal. Wait for @hectoresen to merge.
-2. IMPLEMENT: separate branch and PR only after spec PR owner-merged. Include OpenSpec-Change: <id>, OpenSpec-Phase: implementation, OpenSpec-Approval-PR: <real number>. Only modify approved implementation paths; in OpenSpec only tasks.md may be advanced. Stop for review and real game testing.
-3. VERIFY / SYNC / ARCHIVE: do so after real approval and acceptance; do not claim in-game PASS from CI.
+For each gameplay change:
+1. Create `openspec/changes/<id>/proposal.md`, `design.md`, `tasks.md`, `specs/<capability>/spec.md` and `sdd-scope.json`.
+2. Open a **spec-only PR**, declaring `OpenSpec-Change: <id>` and `OpenSpec-Phase: proposal`. Owner @hectoresen merges it before implementation.
+3. Implement in a separate PR limited to approved paths, with `OpenSpec-Change`, `OpenSpec-Phase: implementation`, `OpenSpec-Approval-PR: <merged proposal PR>`. Only update tasks.md within that approved change; no spec/design/scope mutations.
+4. Read and run skills/documentation-sync/SKILL.md before functional PRs. Record actual test results.
+5. Human verification in Forever is mandatory before a claim of game correctness.
 
-Official OpenSpec CLI package: @fission-ai/openspec. Consult current CLI help and generated profile rather than inventing commands. This repository does **not** yet have CraftAtlas's custom server-backed SDD validator reproduced or configured; manual source/PR reviews are mandatory until gate is ported and proven. No combined spec+implementation shortcuts.
+Official CLI: `@fission-ai/openspec`. CI runs `openspec validate --all --strict --no-interactive`. Custom provenance checks are separate from the official CLI. No combined PRs, and no reuse of CraftAtlas exception numbers.
 
-First proposed experiment should cover A1 and B1 independently (or separate proposals) and reference docs/EXPERIMENTS.md.
+The experimental roadmap is docs/EXPERIMENTS.md. No addon functionality implemented yet.
