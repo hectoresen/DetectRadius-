@@ -1,0 +1,15 @@
+schema: spec-driven
+context: |
+  DetectRadius is a lightweight World of Warcraft Forever Lua addon proposal.
+  No playable addon or live-tested detection radius exists at bootstrap.
+  The addon estimates NPC detection from level delta and explores honest 2D renderings.
+  Read AGENTS.md and docs/EXPERIMENTS.md. Avoid claims of ground-locked 3D capability.
+rules:
+  proposal:
+    - State scope, risks, Forever API/build assumptions, fallback and rollback.
+  specs:
+    - Use testable SHALL and WHEN/THEN scenarios, including unknown levels and invalid targets.
+  design:
+    - Separate pure range estimate from native UI presentation; document coordinate uncertainty.
+  tasks:
+    - Include offline tests, real client observations and documentation review.
