@@ -5,13 +5,25 @@ on:
     branches: [main]
 permissions:
   contents: read
+  pull-requests: read
 jobs:
   repository-validation:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Validate documentation scaffold
+      - name: Validate repository scaffold
         run: python3 scripts/validate_repo.py
+      - name: Test documentation gate
+        run: python3 -m unittest discover -s tests -p 'test_validate_documentation.py' -v
+      - name: Check PR documentation attestation
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          git fetch origin "$BASE_REF:refs/remotes/origin/$BASE_REF"
+          python3 scripts/validate_documentation.py --base "origin/$BASE_REF" --head HEAD --event "$GITHUB_EVENT_PATH"
