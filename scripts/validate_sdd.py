@@ -172,27 +172,7 @@ def validate(files, body, pr_number, root=Path("."), base="origin/main",
         if exists_in_base(base_path + "proposal.md"):
             errors.append("Proposal ID already on base; create a new change")
     elif phase == "combined":
-        # Narrow owner-authorized pilot: PR #999999 only. Keep future two-PR gates intact.
-        if pr_number != 14 or change != "improve-material-explorer-ui":
-            errors.append("Combined phase is authorized only for DetectRadius PR #999999")
-        if approval:
-            errors.append("Combined phase cannot claim a separately merged approval")
-        if base_path + "proposal.md" not in changed:
-            errors.append("Combined PR must add its own proposal.md")
-        if exists_in_base(base_path + "proposal.md"):
-            errors.append("Combined PR must introduce a new change ID")
-        if not outside:
-            errors.append("Combined PR must include implementation outside its specs")
-        # These three governance files and AGENTS.md are required to document
-        # the exact one-time policy exception; no other special paths allowed.
-        special = {"scripts/validate_sdd.py", "tests/test_validate_sdd.py",
-                   "docs/SDD_COMPLIANCE.md", "AGENTS.md"}
-        for path in outside:
-            if path not in special and not (path in allowed or any(
-                    x.endswith("/**") and path.startswith(x[:-2]) for x in allowed)):
-                errors.append("Combined PR changed file outside its approved sdd-scope.json: " + path)
-        if any(path.startswith(".github/") for path in outside):
-            errors.append("Combined PR cannot modify workflow enforcement")
+        errors.append("Combined specification and implementation PRs are forbidden")
     elif phase == "implementation":
         if not approval:
             errors.append("Implementation requires OpenSpec-Approval-PR")
@@ -212,7 +192,7 @@ def validate(files, body, pr_number, root=Path("."), base="origin/main",
         # This one owner-approved governance change may update protected agent
         # instructions, but only inside its own explicitly scoped implementation.
         # Every other implementation continues to reject AGENTS.md unconditionally.
-        special_agent_change = change == "mandatory-multiagent-documentation-gate"
+        special_agent_change = False
         if any((p.startswith(".github/") and not (is_explicit_workflow_path(p) and p in allowed))
                or (p == "AGENTS.md" and not (special_agent_change and p in allowed))
                for p in outside):
