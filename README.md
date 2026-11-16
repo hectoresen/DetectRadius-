@@ -1,6 +1,6 @@
 # DetectRadius
 
-Experimental World of Warcraft: Forever addon for a **selected hostile NPC**. A1 uses a Classic-inspired *unverified* detection estimate based on player vs NPC levels; B1 places a **screen-space** red translucent ellipse beside the selected target's visible nameplate. The ring is illustrative, **not** a world-space ground circle or a safe distance boundary. After the first player screenshot showed the ring too close to the nameplate, B1's visual anchor was lowered by a fixed UI-space offset for a second trial. It is not terrain tracking or an accurate yard radius.
+Experimental World of Warcraft: Forever addon. A1 computes a **provisional, unverified** level-based estimate. **B1 red ring was disabled following real-game failure:** it remained a small screen-space shape and the user was attacked outside it. No ground-space safe perimeter is available.
 
 ## Install experimental source
 
@@ -9,12 +9,12 @@ Copy **only** `addon/DetectRadius/` to `World of Warcraft/Interface/AddOns/Detec
 Commands:
 - `/dr on`: enable target-only experiment.
 - `/dr off`: disable and hide.
-- `/dr`: display usage.
+- `/dr estimate`: chat-only estimate for selected hostile NPC; **not a safe range**.\n- `/dr`: display usage.
 
-Setting persists across sessions; default off until explicitly activated. When nameplates are hidden/target invalid, the ring hides. It does **not** mark the actual ground; an estimated value in yards does not control the pixel radius.
+Setting persists across sessions; default off until explicitly activated. No ring is displayed, even when enabled. The previous fixed-pixel visual was rejected; this build is diagnostic-only.
 
 ## Tests and experiment status
 
-Offline test command: `texlua tests/test_detection_estimate.lua`, `texlua tests/test_unit_api.lua`, `texlua tests/test_nameplate_api.lua`. Automated tests cannot establish in-game compatibility. **Owner Forever tests NOT RUN**: see [experiments](docs/EXPERIMENTS.md) and [testing](docs/TESTING.md). Screenshot/evidence required before calling B1 successful.
+Offline test command: `texlua tests/test_detection_estimate.lua`, `texlua tests/test_unit_api.lua`, `texlua tests/test_nameplate_api.lua`. Automated tests cannot establish in-game compatibility. **B1 visual test FAILED in-game; new diagnostic-only revision NOT RUN**: see [experiments](docs/EXPERIMENTS.md) and [testing](docs/TESTING.md). Screenshot/evidence required before calling B1 successful.
 
 Engineering workflow is inherited from CraftAtlas conventions: [agent guidance](AGENTS.md), [contribution protocol](CONTRIBUTING.md), [architecture](docs/ARCHITECTURE.md), [OpenSpec](openspec/README.md). Do not merge/release without maintainer approval.
