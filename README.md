@@ -1,6 +1,6 @@
 # DetectRadius
 
-Experimental World of Warcraft: Forever addon for a **selected hostile NPC**. A1 uses a Classic-inspired *unverified* detection estimate based on player vs NPC levels; B1 places a **screen-space** red translucent ellipse beside the selected target's visible nameplate. The ring is illustrative, **not** a world-space ground circle or a safe distance boundary.
+Experimental World of Warcraft: Forever addon for a **selected hostile NPC**. A1 uses a Classic-inspired *unverified* detection estimate based on player vs NPC levels; B1 places a **screen-space** red translucent ellipse beside the selected target's visible nameplate. The ring is illustrative, **not** a world-space ground circle or a safe distance boundary. After the first player screenshot showed the ring too close to the nameplate, B1's visual anchor was lowered by a fixed UI-space offset for a second trial. It is not terrain tracking or an accurate yard radius.
 
 ## Install experimental source
 
