@@ -1,6 +1,6 @@
 # DetectRadius — ordered experiment plan (source of truth)
 
-Status: **ALL NOT RUN**. Owner @hectoresen tests each candidate in the real WoW Forever client. Engineering assumptions below are hypotheses until observed. Goal: visually communicate an *estimated* hostile NPC detection radius, ideally as a red translucent ground-like ring; never promise an actual safe boundary.
+Status: **A1/B1 first in-game screenshot received; remaining experiments NOT RUN**. Owner @hectoresen tests each candidate in the real WoW Forever client. Engineering assumptions below are hypotheses until observed. Goal: visually communicate an *estimated* hostile NPC detection radius, ideally as a red translucent ground-like ring; never promise an actual safe boundary.
 
 ## Experimental rules
 
@@ -28,7 +28,7 @@ Status: **ALL NOT RUN**. Owner @hectoresen tests each candidate in the real WoW 
 
 ## Current prototype notes (A1/B1)
 
-The experimental addon now contains a fixed-pixel translucent nameplate ellipse and a provisional level-delta estimate. This is **not** a world-calibrated detection circle. A1/B1 remain **unchecked** until the owner records in-game evidence; implementation alone is not success. Start with `/dr on`, a visible hostile target nameplate, and `/console scriptErrors 1`. The TOC interface `16001` is provisional and must be checked in the real client. A1 initial pure calculation regression passed using a local texlua reproduction; actual Forever API, nameplate render and remaining tests are not established.
+The experimental addon now contains a fixed-pixel translucent nameplate ellipse and a provisional level-delta estimate. This is **not** a world-calibrated detection circle. A1/B1 acceptance remains **unchecked**. The first owner screenshot confirms the overlay is visible in one target scenario, not that it follows movement, works in combat or represents safe yardage. Start with `/dr on`, a visible hostile target nameplate, and `/console scriptErrors 1`. The TOC interface `16001` is provisional and must be checked in the real client. A1 initial pure calculation regression passed using a local texlua reproduction; the nameplate ring render has been observed in one Forever screenshot; exact API behavior beyond that and remaining tests are not established.
 
 ## Test dependency and order
 
@@ -51,7 +51,11 @@ The experimental addon now contains a fixed-pixel translucent nameplate ellipse 
 
 | Date | Candidate | Build / PR | Result | Evidence link | Finding / next step |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-15 | All candidates | N/A | NOT RUN | N/A | Initial plan prepared |\n| 2026-11-16 | A1/B1 prototype | feat/a1-b1-nameplate-prototype | INCONCLUSIVE / client NOT RUN | PR pending | Code implemented for offline/manual evaluation; heuristic and ring are not verified in Forever |
+| 2026-11-15 | All candidates | N/A | NOT RUN | N/A | Initial plan prepared |\n| 2026-11-16 | B1 screenshot #1 | PR #4 initial build | PARTIAL — render visible | Owner screenshot shared in conversation | Red ellipse and ~32 yd (est.) appear beneath selected Basilisco Ojogélido nameplate, player level 28. Ring sits too high; not on terrain, and scale is illustrative only. A1 formula is not independently verified against real detection. |\n| 2026-11-16 | B1 visual alignment revision | PR #4 (same branch) | NOT RUN | commit b004cd3 | Vertical screen-space offset changed from -35 to -100 UI units for another visual check. Not world-space, no yard-to-pixel conversion; test across zoom and target changes before accepting. |
+
+## Next in-game test — updated B1 in PR #4
+
+Install the latest PR #4 commit, `/reload`, select the same NPC from a comparable camera position, then test a closer/farther NPC and change zoom. Capture screenshots showing whether the ring moves nearer the model's feet without floating or giving a false ground radius. A fixed UI offset cannot guarantee correct positioning at different depths; mark FAIL if misleading. Exact detection-radius calibration belongs to A2, not this visual experiment.
 
 ## Owner in-game report template
 
