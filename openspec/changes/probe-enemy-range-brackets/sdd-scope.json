@@ -1,0 +1,11 @@
+{
+  "allowed_paths": [
+    "addon/DetectRadius/**",
+    "tests/**",
+    "README.md",
+    "docs/ARCHITECTURE.md",
+    "docs/EXPERIMENTS.md",
+    "docs/TESTING.md",
+    "CHANGELOG.md"
+  ]
+}
