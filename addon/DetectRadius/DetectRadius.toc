@@ -1,0 +1,12 @@
+## Interface: 16001
+## Title: DetectRadius
+## Notes: Experimental, approximate enemy detection range (A1/B1)
+## Author: hectoresen
+## Version: 0.1.0-alpha
+## SavedVariables: DetectRadiusDB
+
+Domain/DetectionEstimate.lua
+Infrastructure/UnitApi.lua
+Infrastructure/NameplateApi.lua
+Features/Ring.lua
+Core/Init.lua
