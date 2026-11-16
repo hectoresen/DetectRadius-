@@ -26,6 +26,10 @@ Status: **ALL NOT RUN**. Owner @hectoresen tests each candidate in the real WoW 
 - [ ] **B5: HUD ring or perimeter warning fallback.** Screen overlay showing calculated estimate/risk status, clearly not world-space. Prefer truthful UX if B1–B4 are inaccurate.
 - [ ] **B6: genuine ground-locked 3D decal (expected unavailable).** Treat as research-only; do not implement absent a documented, permitted native client API and successful in-game demonstration. Normal addon Lua 2D textures do not produce a physically accurate 3D ground circle.
 
+## Current prototype notes (A1/B1)
+
+The experimental addon now contains a fixed-pixel translucent nameplate ellipse and a provisional level-delta estimate. This is **not** a world-calibrated detection circle. A1/B1 remain **unchecked** until the owner records in-game evidence; implementation alone is not success. Start with `/dr on`, a visible hostile target nameplate, and `/console scriptErrors 1`. The TOC interface `16001` is provisional and must be checked in the real client. A1 initial pure calculation regression passed using a local texlua reproduction; actual Forever API, nameplate render and remaining tests are not established.
+
 ## Test dependency and order
 
 1. Bootstrap addon and validate client build/API discovery; no game claims beforehand.
@@ -47,7 +51,7 @@ Status: **ALL NOT RUN**. Owner @hectoresen tests each candidate in the real WoW 
 
 | Date | Candidate | Build / PR | Result | Evidence link | Finding / next step |
 | --- | --- | --- | --- | --- | --- |
-| 2026-11-15 | All candidates | N/A | NOT RUN | N/A | Plan prepared; first implementation awaits owner-approved OpenSpec |
+| 2026-11-15 | All candidates | N/A | NOT RUN | N/A | Initial plan prepared |\n| 2026-11-16 | A1/B1 prototype | feat/a1-b1-nameplate-prototype | INCONCLUSIVE / client NOT RUN | PR pending | Code implemented for offline/manual evaluation; heuristic and ring are not verified in Forever |
 
 ## Owner in-game report template
 
