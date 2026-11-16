@@ -15,10 +15,10 @@
 - [x] Implement one cached optional 2D semitransparent ring anchored to target nameplate when permitted (client NOT RUN).
 - [x] Add /dr on and /dr off, hidden invalid/friendly/unselected, cleanup and re-target behavior (code only; client NOT RUN).
 - [ ] Check nameplate visibility changes, target switches, zoom, scale, combat and UI restrictions.
-- [ ] Record complete screenshot matrix, client build and PASS/FAIL/INCONCLUSIVE in docs/EXPERIMENTS.md (first screenshot logged; revised offset NOT RUN).
+- [x] Record owner B1 **FAIL** and screenshots in docs/EXPERIMENTS.md (client build still not supplied; disabled visual retest NOT RUN).
 
 ## QA/release
 - [ ] Run offline validation/lint if available and report actual command/results.
 - [x] Read documentation-sync skill and reconcile README, ARCHITECTURE, TESTING and EXPERIMENTS; CHANGELOG not yet present. Client NOT RUN.
 - [ ] Open separate implementation PR with real owner-merged spec PR number and documented results.
-- [ ] Owner decides whether B1 is viable; if rejected, leave next candidates untouched until a separate proposal.
+- [x] Owner reported B1 unsuitable; second screenshot and attack outside drawn ellipse establish failure for safe-boundary use. Ring disabled in PR #4; A1 only chat diagnostic. New strategies require separate spec approval.
