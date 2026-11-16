@@ -9,7 +9,7 @@ texlua tests/test_nameplate_api.lua
 ```
 These test pure math and guarded API stubs. They do not test actual Forever APIs. Report any missing `texlua` interpreter as NOT RUN.
 
-## Owner-only in-game acceptance checklist (one screenshot received, most checks NOT RUN)
+## Owner in-game acceptance (B1 FAILED in two screenshots; remaining checks NOT RUN)
 - [ ] Record Forever game build/interface number, locale, client version.
 - [ ] Copy addon folder, enable, `/console scriptErrors 1`, `/reload`.
 - [ ] `/dr on` and `/dr off` activate/hide reliably; reload preserves state.
@@ -17,9 +17,9 @@ These test pure math and guarded API stubs. They do not test actual Forever APIs
 - [ ] Friendly, player, unknown/skull level, no target: ring hidden.
 - [ ] Target nameplate visible/hidden, target switch, target leaves view or despawns.
 - [ ] Camera zoom, UI scale, resolution and combat/noncombat show no stuck/misleading ring or Lua errors.
-- [x] Initial screenshot received: visible B1 ellipse underneath Basilisco Ojogélido nameplate and ~32 yd estimate; initial vertical position too high. No true detection threshold measured.\n- [ ] Re-test new B1 -100 UI unit offset using the same NPC, camera movement and closer/farther targets; record screenshot and whether it is actually near its feet.\n- [ ] Record additional screenshot/video and observed detection threshold separately, no invented exact range.
-- [ ] Explicitly mark B1 PASS/FAIL/INCONCLUSIVE and whether candidate B2 is warranted.
+- [x] Initial screenshot received: visible B1 ellipse underneath Basilisco Ojogélido nameplate and ~32 yd estimate; initial vertical position too high. No true detection threshold measured.\n- [x] Owner retested B1 with Crocolisco Aguasalada: ring was small/over NPC body and hostile NPC attacked while player was outside visual ring. Mark B1 **FAIL** for reliable danger boundary.\n- [ ] Record additional screenshot/video and observed detection threshold separately, no invented exact range.
+- [x] B1 marked **FAIL** for conveying a safe world-space danger radius; do not treat A1 formula as independently validated.\n- [ ] Confirm latest PR #4 hides ring after reload and `/dr on`, and `/dr estimate` shows chat-only unverified value.
 
 Important: illustrative ring radius is fixed in screen pixels and **cannot tell the player where the safe ground boundary lies**. Misleading visuals should FAIL B1.
 
-Use report template in `docs/EXPERIMENTS.md`. One screenshot has been supplied; the updated offset is **NOT RUN** in-game.
+Use report template in `docs/EXPERIMENTS.md`. Two screenshots and owner-reported attack are available. The new **ring-disabled** commit is **NOT RUN** in-game.
