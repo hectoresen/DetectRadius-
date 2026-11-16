@@ -1,4 +1,4 @@
-# Tasks (all NOT RUN)
+# Tasks (source implementation in progress; client tests NOT RUN)
 
 ## Proposal
 - [x] Owner reviews and merges this spec-only PR (#3; proposal files present on main).
