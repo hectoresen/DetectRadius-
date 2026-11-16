@@ -6,6 +6,10 @@ ns.Ring = ring
 local overlay
 local slices = 32
 local width, height = 64, 23
+-- B1 screen-space alignment: screenshot #1 showed the ring immediately under
+-- the nameplate instead of near the NPC. This is an illustrative offset only.
+-- It does NOT track the NPC's feet or project a radius onto the terrain.
+local verticalOffset = -100
 local TWO_PI = math.pi * 2
 
 local function atan2(y, x)
@@ -61,7 +65,7 @@ function ring.ShowAt(nameplate, radius)
     local ok = pcall(function()
         frame:Hide()
         frame:ClearAllPoints()
-        frame:SetPoint("CENTER", nameplate, "CENTER", 0, -35)
+        frame:SetPoint("CENTER", nameplate, "CENTER", 0, verticalOffset)
         frame.label:SetText("~" .. tostring(radius) .. " yd (est.)")
         frame:Show()
     end)
