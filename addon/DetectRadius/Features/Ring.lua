@@ -8,6 +8,15 @@ local slices = 32
 local width, height = 64, 23
 local TWO_PI = math.pi * 2
 
+local function atan2(y, x)
+    if math.atan2 then return math.atan2(y, x) end
+    if x > 0 then return math.atan(y / x) end
+    if x < 0 then return math.atan(y / x) + (y >= 0 and math.pi or -math.pi) end
+    if y > 0 then return math.pi / 2 end
+    if y < 0 then return -math.pi / 2 end
+    return 0
+end
+
 local function build()
     if overlay then return overlay end
     if type(CreateFrame) ~= "function" then return nil end
@@ -30,8 +39,7 @@ local function build()
         seg:SetSize(math.sqrt((x2 - x1)^2 + (y2 - y1)^2) + 1, 3)
         seg:SetPoint("CENTER", overlay, "CENTER", midX, midY)
         if type(seg.SetRotation) == "function" then
-            seg:SetRotation(math.atan2 and math.atan2(y2-y1, x2-x1)
-                or math.atan((y2-y1), (x2-x1)))
+            seg:SetRotation(atan2(y2 - y1, x2 - x1))
         end
     end
 
