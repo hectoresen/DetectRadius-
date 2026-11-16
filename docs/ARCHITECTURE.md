@@ -1,25 +1,14 @@
-# DetectRadius architecture — planned, not implemented
+# DetectRadius architecture — A1/B1 experimental prototype
 
-Status: documentation-only bootstrap. No working addon exists yet.
+- `addon/DetectRadius/DetectRadius.toc`: addon load order. Interface 16001 is **provisional** pending client verification.
+- `Domain/DetectionEstimate.lua`: pure, bounded level-delta heuristic, **not empirical Forever detection**.
+- `Infrastructure/UnitApi.lua`: guarded hostile/valid target and levels.
+- `Infrastructure/NameplateApi.lua`: safely query visible target nameplate through guarded `C_NamePlate.GetNamePlateForUnit`.
+- `Features/Ring.lua`: cached screen-space red ellipse assembled from UI textures. Fixed pixel geometry, no conversion from estimate to accurate ground radius.
+- `Core/Init.lua`: events, enable state persistence and `/dr on|off`.
 
-Expected lightweight source layout after approved spec:
-```
-addon/DetectRadius/
-  DetectRadius.toc
-  Core/                 addon lifecycle and enable/disable
-  Domain/               pure level-delta estimate and limits
-  Infrastructure/       guarded unit, nameplate and range adapters
-  Features/             2D ring, fallback HUD and settings
-  Localization/         enUS / esES
-openspec/               approved requirements and proposals
-docs/                   experiment matrix and owner observations
-scripts/                offline structural/packaging checks (when added)
-tests/                  pure Lua behavior tests (when added)
-skills/                  mandatory documentation sync
-```
+The UI frame anchors to a visible target nameplate, not to coordinates in the 3D world. Its offset does not vary with actual ground depth or yard distance. A target moving or the camera zooming may make the ellipse visually inaccurate or unavailable. It hides if the plate API is missing or attachment fails. Combat restrictions and actual API behavior remain **unverified**.
 
-Architectural constraint: the UI layer cannot paint a genuine 3D decal on ground using ordinary WoW Lua frames; nameplate-anchored overlays are 2D approximations. Distance returned from spell range checks is generally a range/interval, not exact coordinate separation. Calculating an approximate radius does not automatically imply drawing an accurate screen-sized ring.
+Keep this experiment isolated: no LibRangeCheck, ground decals, world coordinates, telemetry, all-NPC scanning or prohibited client APIs. SavedVariables only stores enabled state.
 
-Guard every API for Forever client build and combat/security restrictions. Avoid frame-by-frame scans, allocate textures once, throttle sampling and skip unselected or invalid targets. No dependency unless a measured experiment proves it necessary. Keep estimates in Domain so tests can exercise edge conditions without game globals.
-
-Do not reuse CraftAtlas's profession-specific data pipeline, catalogs, components or product claims. Reuse its *development conventions* and review gates only.
+Specifications: `openspec/changes/estimate-level-and-nameplate-ring/`. The owner tests A1 and B1 separately and logs results. CI only checks structure/provenance; it does not prove visual accuracy.
