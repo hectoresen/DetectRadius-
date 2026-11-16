@@ -30,3 +30,7 @@ The A3 implementation SHALL NOT reactivate B1, draw a 3D/2D danger ring, call a 
 
 ### Requirement: Manual Forever verification
 Before any A3 verdict is accepted, the maintainer SHALL record build, class/character constraints, NPC, outcomes, relevant errors and evidence. Offline CI success SHALL NOT substitute for in-game evidence.
+
+#### Scenario: Evidence required before acceptance
+- **WHEN** the maintainer evaluates an A3 range-check result in the Forever game client
+- **THEN** the test record SHALL include the actual client build, character class, selected NPC, observed check outputs, relevant Lua errors and supporting evidence, and SHALL distinguish in-game observations from offline CI results
