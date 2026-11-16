@@ -1,16 +1,25 @@
-# Testing / evidence
+# DetectRadius testing
 
-Status: documentation scaffold, addon not implemented, no in-game tests run.
+## Offline (repeat and record executed results)
+```sh
+python3 scripts/validate_repo.py
+texlua tests/test_detection_estimate.lua
+texlua tests/test_unit_api.lua
+texlua tests/test_nameplate_api.lua
+```
+These test pure math and guarded API stubs. They do not test actual Forever APIs. Report any missing `texlua` interpreter as NOT RUN.
 
-## Automated checks
-When implemented, separately test pure Domain estimation (bounds, level parity, invalid/skull inputs), guarded Infrastructure wrappers, state toggles, frame attachment cleanup and packaging paths. CI cannot emulate the real client. Document exact checks run, and say NOT RUN for others.
+## Owner-only in-game acceptance checklist (all NOT RUN)
+- [ ] Record Forever game build/interface number, locale, client version.
+- [ ] Copy addon folder, enable, `/console scriptErrors 1`, `/reload`.
+- [ ] `/dr on` and `/dr off` activate/hide reliably; reload preserves state.
+- [ ] At least two hostile NPCs with different level deltas: observe `~Y yd (est.)`, compare with formula (not actual aggro).
+- [ ] Friendly, player, unknown/skull level, no target: ring hidden.
+- [ ] Target nameplate visible/hidden, target switch, target leaves view or despawns.
+- [ ] Camera zoom, UI scale, resolution and combat/noncombat show no stuck/misleading ring or Lua errors.
+- [ ] Record screenshot/video and observed detection threshold separately, no invented exact range.
+- [ ] Explicitly mark B1 PASS/FAIL/INCONCLUSIVE and whether candidate B2 is warranted.
 
-## In-game test protocol
-1. Enable /console scriptErrors 1; /reload; record Forever exact client build and interface.
-2. Test addon disabled/enabled, selected hostile/neutral/friendly/no target and target switching.
-3. For one fixed NPC, approach from multiple positions while logging whether the actual pull happens; vary level delta only through controlled scenarios.
-4. Repeat nameplate visible/hidden, zoom/UI scale, combat, occlusion, vertical differences and crowded nameplates.
-5. Record each candidate from docs/EXPERIMENTS.md with PASS/FAIL/INCONCLUSIVE and screenshot/video.
-6. Capture any FPS change, Lua error, inaccurate screen anchoring and misleading indication; revert invalid prototype.
+Important: illustrative ring radius is fixed in screen pixels and **cannot tell the player where the safe ground boundary lies**. Misleading visuals should FAIL B1.
 
-No automated or documentation check establishes that an estimated ring corresponds to the actual safe in-game path.
+Use report template in `docs/EXPERIMENTS.md`. No in-game results have been supplied.
