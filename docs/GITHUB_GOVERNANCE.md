@@ -1,12 +1,15 @@
-# GitHub governance — requested configuration vs verified state
+# GitHub governance
 
-Adopt CraftAtlas process: separate owner-approved spec and implementation PRs, review gates, docs sync, CI evidence, no agent merges/releases.
+## Implemented in repository (pending owner merge)
+- `.github/CODEOWNERS` lists @hectoresen.
+- CI provides structural repository and documentation checks.
+- SDD Compliance workflow, `scripts/validate_sdd.py` and regression tests enforce owner-merged spec PR provenance and bounded implementation scope when executed.
+- PR template requires concrete test results and owner review.
 
-Target settings (owner-controlled, not established merely by this file):
-- Protect main against direct pushes, force pushes and deletion; require pull requests and passing checks.
-- Require owner review and ideally restrict merge permissions to owner where GitHub plan and roles allow; standard required approval alone does NOT enforce owner-only merging.
-- Require CI and spec-traceability checks after they first run; prefer squash merges.
-- CODEOWNERS and AGENTS.md express intent but **are not server-side enforcement**.
-- Verify rulesets, workflows, protections and merge permissions in repository settings and a test PR before claiming they are active.
+## Required GitHub settings (not configured by this PR)
+Protect `main`: require pull requests and approval(s), require the two named green checks once proven, prevent force pushes/deletion and direct pushes; consider squash-only merges and delete-head-branch. Confirm whether repo plan/roles permit an actual owner-only merge restriction; standard review settings alone do not do so. No bypass actors without explicit approval.
 
-This bootstrap does **not** change GitHub repository settings, secrets, branch protection or permissions. Applying them requires explicit owner approval and compatible administrative access.
+**Do not claim these protections are active** until GitHub ruleset settings are saved and verified. This connector exposes no branch-ruleset administration action, so the maintainer must configure them in GitHub Settings or authorize an alternative admin workflow.
+
+## Safety limits
+A CI check validates syntactic evidence, not semantic specification compliance, game-client compatibility, or real-world range accuracy. Agents do not merge, publish releases, change permissions, or mark unrun checks green.
