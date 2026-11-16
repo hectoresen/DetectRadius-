@@ -11,11 +11,11 @@
 - [ ] Record observed in-game evidence; do not claim empirical detection accuracy.
 
 ## B1
-- [ ] Probe nameplate API and game event support in client, recording failures.
+- [ ] Probe full nameplate API and game event support in client, recording failures (first screenshot confirms only that the ring rendered for one selected target).
 - [x] Implement one cached optional 2D semitransparent ring anchored to target nameplate when permitted (client NOT RUN).
 - [x] Add /dr on and /dr off, hidden invalid/friendly/unselected, cleanup and re-target behavior (code only; client NOT RUN).
 - [ ] Check nameplate visibility changes, target switches, zoom, scale, combat and UI restrictions.
-- [ ] Record screenshots, client build and PASS/FAIL/INCONCLUSIVE in docs/EXPERIMENTS.md.
+- [ ] Record complete screenshot matrix, client build and PASS/FAIL/INCONCLUSIVE in docs/EXPERIMENTS.md (first screenshot logged; revised offset NOT RUN).
 
 ## QA/release
 - [ ] Run offline validation/lint if available and report actual command/results.
